@@ -10,9 +10,18 @@ const schema = buildSchema(`
     equipment: [String]
   }
 
+  # Read
   type Query {
     getCharacter(name: String): Character
   }
+
+  # Create, Update, Delete
+  type Mutation {
+    createCharacter(name: String): Character
+    updateChatacter(id: String): Character
+    deleteCharacter(id: String): Character
+  }
+
 `);
 
 class Character {
@@ -23,7 +32,16 @@ class Character {
 
 const root = {
     getCharacter: ({name}) =>{
-      return new Character(name);
+      if(!fakeDatabase[id]){
+        thrownewError('no exist id：' + id);
+      }
+      return new Character(id, fakeDatabase[id]);
+    },
+    updateCharacter: ({id}) => {
+
+    },
+    deleteCharacter: ({id}) => {
+
     }
 };
 
